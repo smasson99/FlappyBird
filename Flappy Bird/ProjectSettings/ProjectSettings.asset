@@ -616,7 +616,7 @@ PlayerSettings:
   cloudServicesEnabled:
     UNet: 1
   facebookSdkVersion: 7.9.4
-  apiCompatibilityLevel: 2
+  apiCompatibilityLevel: 3
   cloudProjectId: 972ab0fc-e53f-4187-847b-e3d5349a0a7a
   projectName: Flappy Bird
   organizationId: samuel-masson
