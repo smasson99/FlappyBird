@@ -46,13 +46,15 @@ public class GameController : MonoBehaviour
 
   private void IncrementScore()
   {
-    ++Score;
+    Debug.Log("Increment score!");
+    Score++;
   }
 
   private void NotifyScoreChanged()
   {
     if (OnScoreChanged != null)
     {
+      Debug.Log("OnScoreChanged!");
       OnScoreChanged();
     }
   }

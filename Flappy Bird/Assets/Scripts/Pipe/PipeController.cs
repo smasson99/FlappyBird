@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Assets.Scripts;
 
 public class PipeController : MonoBehaviour
 {
@@ -26,10 +27,13 @@ public class PipeController : MonoBehaviour
   private float maxX = 3.0f;
 
   private BirdSensor birdSensor;
+  private PipePassedEventChannel pipePassedEventChannel;
 
   private void Awake()
   {
     birdSensor = transform.root.GetComponentInChildren<BirdSensor>();
+    pipePassedEventChannel = GameObject.FindGameObjectWithTag(Tags.GameController).
+    GetComponent<PipePassedEventChannel>();
 
     if (upperPipe == null)
     {
@@ -42,6 +46,10 @@ public class PipeController : MonoBehaviour
     if (birdSensor == null)
     {
       Debug.Log("Could not find the birdSensor component!");
+    }
+    if (pipePassedEventChannel == null)
+    {
+      Debug.Log("PipePassedEventChannel or GameController not found!");
     }
 
     RandomizePipeHeights();
@@ -67,7 +75,8 @@ public class PipeController : MonoBehaviour
 
   private void NotifyBirdPassed()
   {
-    Debug.Log("Bird passed!");
+    //Debug.Log("Bird passed!");
+    pipePassedEventChannel.Publish();
   }
 
   private void RandomizePipeWidths(GameObject pipeToMove)
