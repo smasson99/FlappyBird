@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Assets.Scripts;
 
 public class BirdController : MonoBehaviour
 {
@@ -16,11 +17,14 @@ public class BirdController : MonoBehaviour
   [SerializeField]
   private BirdPhysics birdPhysics = null;
   private CollisionSensor collisionSensor;
+  private PlayerDiedEventChannel playerDiedEventChannel;
 
   private void Awake()
   {
     this.birdPhysics = birdPhysics ?? transform.root.GetComponentInChildren<BirdPhysics>();
     this.collisionSensor = transform.root.GetComponentInChildren<CollisionSensor>();
+    this.playerDiedEventChannel = GameObject.FindGameObjectWithTag(Tags.GameController).
+    GetComponent<PlayerDiedEventChannel>();
 
     if (birdPhysics == null)
     {
@@ -61,10 +65,16 @@ public class BirdController : MonoBehaviour
   private void Die()
   {
     Hide();
+    NotifyBirdDeath();
   }
 
   private void Hide()
   {
     transform.root.gameObject.SetActive(false);
+  }
+
+  private void NotifyBirdDeath()
+  {
+    playerDiedEventChannel.Publish();
   }
 }

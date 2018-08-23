@@ -27,6 +27,11 @@ public class ScoreUI : MonoBehaviour
     }
   }
 
+  private void Start()
+  {
+    UpdateScoreUI();
+  }
+
   private void OnEnable()
   {
     gameController.OnScoreChanged += UpdateScoreUI;
@@ -39,7 +44,6 @@ public class ScoreUI : MonoBehaviour
 
   private void UpdateScoreUI()
   {
-    Debug.Log("UpdateScoreUI!!!");
     int? currentScore = gameController?.Score ?? 0;
     scoreText.text = string.Format(FORMAT, currentScore);
   }

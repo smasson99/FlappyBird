@@ -19,6 +19,11 @@ public class TranslateMover : MonoBehaviour
     }
   }
 
+  private void Update()
+  {
+    Move(Vector3.left);
+  }
+
   public void Move(Vector3 direction)
   {
     transform.Translate(direction * speed * Time.deltaTime);
